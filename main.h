@@ -8,7 +8,7 @@
 #include <sys/wait.h>
 #include <unistd.h>
 
-
+void prompt();
 
 
 #endif
