@@ -9,6 +9,7 @@
 #include <unistd.h>
 
 void prompt();
+void execmd(char **argv);
 
 
 #endif

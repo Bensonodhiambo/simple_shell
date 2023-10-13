@@ -4,7 +4,7 @@
  */
 void prompt()
 {
-	char * prompt = ("$ ");
+	char *prompt = ("$ ");
 
-	printf("%s ",prompt);
+	printf ("%s ",prompt);
 }
