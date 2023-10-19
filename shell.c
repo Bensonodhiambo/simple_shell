@@ -68,7 +68,5 @@ int main(int argc, char *av[], char **environ)
 		}
 		free(food);
 	}
-	
-	
 	return (0);
 }

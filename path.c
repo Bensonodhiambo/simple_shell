@@ -1,6 +1,6 @@
 #include "shell.h"
 /**
- *see -  used to get the path
+ *getpath -  used to get the path
  *@path: path to be found
  *@cmd: argument used to find path
  *Return: 0
@@ -9,7 +9,7 @@
 void getpath(char *cmd, char path[])
 {
 	char *acdup, *tok;
-	
+
 	if (access(cmd, X_OK) == 0)
 		return;
 	acdup = strdup(getenv("PATH"));
@@ -25,7 +25,6 @@ void getpath(char *cmd, char path[])
 		if (access(path, X_OK) == 0)
 		{
 			break;
-			
 		}
 		tok = strtok(NULL, ":");
 	}
