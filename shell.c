@@ -17,7 +17,7 @@ int main(int argc, char *av[], char **environ)
 	int i;
 	pid_t child;
 	int status;
-	char *tex;
+	char path[256];
 	char *argv[100];
 
 
@@ -28,11 +28,12 @@ int main(int argc, char *av[], char **environ)
 	{
 		if (isatty(STDIN_FILENO))
 			printf("$ ");
+		food = NULL;
 		get = getline(&food, &num, stdin);
 		if (get == -1)
 		{
-			letprint("Exit shell\n");
-			return (-1);
+			free(food);
+			break;
 		}
 		i = 0;
 		argv[i] = strtok(food, delim);
@@ -44,13 +45,13 @@ int main(int argc, char *av[], char **environ)
 		}
 		if (argv[0] == NULL)
 			continue;
-		tex = getenvironment(argv[0]);
-		if (tex == NULL)
+		strcpy(path, argv[0]);
+		getpath(argv[0], path);
+		argv[0] = path;
+		if (argv[0] == NULL)
 		{
-			letprint("nothing\n");
 			continue;
 		}
-		argv[0] = tex;
 
 		child = fork();
 		if (child == 0)
@@ -65,7 +66,9 @@ int main(int argc, char *av[], char **environ)
 		{
 			wait(&status);
 		}
+		free(food);
 	}
-	free(food);
+	
+	
 	return (0);
 }

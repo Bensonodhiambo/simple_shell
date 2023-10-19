@@ -6,32 +6,29 @@
  *Return: 0
  */
 
-char *see(char *path, char *cmd)
+void getpath(char *cmd, char path[])
 {
-	char *delim = ":";
-	char *acdup;
-	char *tok;
-	char *fp;
-
-	acdup = strdup(path);
-	tok = strtok(acdup, delim);
+	char *acdup, *tok;
+	
+	if (access(cmd, X_OK) == 0)
+		return;
+	acdup = strdup(getenv("PATH"));
+	tok = strtok(acdup, ":");
 
 	while (tok != NULL)
 	{
-		fp = malloc(strlen(cmd) + strlen(tok) + 2);
+		memset(path, 0, 256);
+		strcpy(path, tok);
+		strcat(path, "/");
+		strcat(path, cmd);
 
-		strcpy(fp, tok);
-		strcat(fp, "/");
-		strcat(fp, cmd);
-
-		if (access(fp, X_OK) == 0)
+		if (access(path, X_OK) == 0)
 		{
-			free(acdup);
-			return (fp);
+			break;
+			
 		}
-		tok = strtok(NULL, delim);
-		free(fp);
+		tok = strtok(NULL, ":");
 	}
 	free(acdup);
-	return (NULL);
 }
+

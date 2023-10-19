@@ -19,8 +19,8 @@ void execmd(char **argv);
 int letprint(char *format);
 int putchars(char c);
 extern char **environ;
-char *getenvironment(char *line);
-char *see(char *path, char *cmd);
+void getpath(char *cmd, char path[]);
+
 
 
 
