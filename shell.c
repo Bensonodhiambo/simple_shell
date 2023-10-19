@@ -26,7 +26,8 @@ int main(int argc, char *av[], char **environ)
 
 	while (1)
 	{
-		printf("$ ");
+		if (isatty(STDIN_FILENO))
+			printf("$ ");
 		get = getline(&food, &num, stdin);
 		if (get == -1)
 		{
