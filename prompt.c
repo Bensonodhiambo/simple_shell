@@ -1,10 +1,15 @@
-#include "main.h"
-/*
- *
- */
-void prompt()
-{
-	char *prompt = ("$ ");
+#include "shell.h"
 
-	printf ("%s ",prompt);
+/*
+*prompt - prints prompt
+*
+*description: void
+* Return: nothing
+*/
+
+void prompt(void)
+{
+	char *prompt = "$ ";
+
+	letprint (prompt);
 }
