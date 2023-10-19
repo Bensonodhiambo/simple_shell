@@ -1,17 +1,10 @@
 #include "shell.h"
-/*
- *main - main function
- *@argc:count of argumments
- *@argv:argument
- *@environ:argument to get environ
- *Return: 0 Always(success)
- */
 
 int main(int argc, char *av[], char **environ);
-/*
+/**
  *main - main function
  *@argc:count of argumments
- *@argv:argument
+ *@av:argument
  *@environ:argument to get environ
  *Return: 0 Always(success)
   */
@@ -33,7 +26,7 @@ int main(int argc, char *av[], char **environ)
 
 	while (1)
 	{
-		prompt();
+		printf("$ ");
 		get = getline(&food, &num, stdin);
 		if (get == -1)
 		{
@@ -56,6 +49,7 @@ int main(int argc, char *av[], char **environ)
 			letprint("nothing\n");
 			continue;
 		}
+		argv[0] = tex;
 
 		child = fork();
 		if (child == 0)
@@ -68,7 +62,7 @@ int main(int argc, char *av[], char **environ)
 		}
 		else
 		{
-			wait(&status)
+			wait(&status);
 		}
 	}
 	free(food);
