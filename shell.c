@@ -44,19 +44,24 @@ int main(int argc, char *av[], char **environ)
 
 		}
 		if (argv[0] == NULL)
+		{
+			fprintf(stderr, "./hsh; 1; %s; not found\n", argv[1]);
 			continue;
+		}
 		strcpy(path, argv[0]);
 		getpath(argv[0], path);
 		argv[0] = path;
 		if (argv[0] == NULL)
 		{
+			fprintf(stderr, "./hsh; 1; %s; not found\n", argv[1]);
 			continue;
 		}
 
 		child = fork();
 		if (child == 0)
 		{
-			execve(argv[0], argv, environ);
+			if(execve(argv[0], argv, environ) == -1)
+			perror("error");
 		}
 		else if (child < 0)
 		{
